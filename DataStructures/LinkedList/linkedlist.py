@@ -48,14 +48,17 @@ class LinkedList:
         temp = self.head
         new_node = Node(data)
         count = 1
-        while count <= pos:
-            #print(count)
-            if count == pos:
-                #print(temp.data)
-                new_node.next = temp.next
-                temp.next = new_node
-            temp = temp.next
-            count+=1
+        if pos == 1:
+            self.insert_beginning(data)
+        else:
+            while count <= pos:
+                #print(count)
+                if count == pos-1:
+                    #print(temp.data)
+                    new_node.next = temp.next
+                    temp.next = new_node
+                temp = temp.next
+                count+=1
 
 
     def print_linked_list(self):
@@ -84,14 +87,26 @@ class LinkedList:
             temp = temp.next
         prev.next = None
 
-    def del_at_pos(self):
+    def del_at_pos(self,pos):
         '''
             This method deletes node at particular position
         '''
-        pass
+        count = 1
+        temp = self.head
+        prev = None
+        if pos == 1:
+            self.head = None
+        else:
+            while count <= pos:
+                if count == pos:
+                    prev.next = temp.next
+                prev = temp
+                temp = temp.next
+                count = count + 1
 
 
 l1 = LinkedList()
+# l1.push(899)
 l1.insert_beginning(1)
 l1.push(2)
 l1.push(3)
@@ -100,9 +115,10 @@ l1.push(5)
 l1.push(6)
 l1.push(7)
 l1.push(8)
-l1.insert_at_pos(3,4)
-#l1.del_at_beg()
-l1.del_at_end()
+l1.insert_at_pos(4,4)
+# l1.del_at_beg()
+# l1.del_at_end()
+l1.del_at_pos(3)
 l1.print_linked_list()
 # l1.del_at_beg()
 # l1.print_linked_list()
