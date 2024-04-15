@@ -69,7 +69,7 @@ class LinkedList:
             This method prints the linked list.
         '''
         temp = self.head
-        print('First Node-->', temp.data)
+        #print('First Node-->', temp.data)
         while temp is not None:
             print(temp.data)
             temp = temp.next
@@ -139,7 +139,7 @@ class LinkedList:
 
     def reverse(self) -> None:
         '''
-            This method reverses the linked list.
+            This method reverses the linked list using three pointers.
         '''
         next_pointer, prev_pointer = None, None
         current = self.head
@@ -150,29 +150,83 @@ class LinkedList:
             current = next_pointer
         self.head = prev_pointer
 
+    def del_alt_node(self):
+        """
+            This method deletes alternate nodes
+        """
+        prev = self.head
+        prev_next = self.head.next
+        while prev is not None and prev_next is not None:
+            prev.next = prev_next.next
+            prev_next = None
+            prev = prev.next
+            if prev is not None:
+                prev_next = prev.next
+
+    def add_one_to_list(self):
+        """
+            Add 1 to list = 1->9->9 becomes 2->0->0
+        """
+        temp = self.head
+        num = 0
+        while temp is not None:
+            num = num * 10 + temp.data
+            temp = temp.next
+        num = num + 1
+        for i in [int(x) for x in str(num)]:
+            self.push(i)
+
+    def add_two_int_lists(self,second):
+        """
+            add 2 lists = 1->0->0 and 5->0 becomes 1->5->0
+        """
+        num1, num2 = 0,0
+        first = self.head
+        sec = second.head
+        while first is not None:
+            num1 = num1 * 10 + first.data
+            first = first.next
+        while sec is not None:
+            num2 = num2 * 10 + sec.data
+            sec = sec.next
+        num3 = num1 + num2
+        l = LinkedList()
+        for i in [int(x) for x in str(num3)]:
+            l.push(i)
+        return l
+    
+    def swap_nodes(self):
+        pass
 
 
-l1 = LinkedList()
-l1.insert_beginning(1)
-l1.push(2)
-l1.push(3)
-l1.push(5)
-l1.push(6)
-l1.push(7)
-l1.push(8)
-l1.insert_at_pos(4,4)
-l1.print_linked_list()
 
-print('Reversing the list now-----')
-# l1.del_at_beg()
-# l1.del_at_end()
-# l1.del_at_pos(3)
-# l1.print_linked_list()
-# print(l1.is_present(10))
-# print(l1.count())
-l1.reverse()
-l1.print_linked_list()
-# l1.del_at_beg()
-# l1.print_linked_list()
+if __name__ == '__main__':
+    l1 = LinkedList()
+    l1.insert_beginning(1)
+    l1.push(0)
+    l1.push(0)
+    l1.print_linked_list()
+    print('---------------')
+    l2 = LinkedList()
+    l2.insert_beginning(5)
+    l2.push(0)
+    l2.print_linked_list()
+    l = l1.add_two_int_lists(l2)
+    print('---------------')
+    l.print_linked_list()
+    # l1.add_one_to_list()
+    # l1.print_linked_list()
+
+    #print('Reversing the list now-----')
+    # l1.del_at_beg()
+    # l1.del_at_end()
+    # l1.del_at_pos(3)
+    # l1.print_linked_list()
+    # print(l1.is_present(10))
+    # print(l1.count())
+    #l1.reverse()
+    #l1.print_linked_list()
+    # l1.del_at_beg()
+    # l1.print_linked_list()
 
     
