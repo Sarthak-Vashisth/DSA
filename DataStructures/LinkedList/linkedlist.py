@@ -195,25 +195,59 @@ class LinkedList:
             l.push(i)
         return l
     
-    def swap_nodes(self):
-        pass
+    def pairwise_swap_nodes(self):
+        temp = self.head
+        temp1 = self.head.next
+        if temp is None:
+            return
+        while temp and temp1:
+            temp.data, temp1.data = temp1.data, temp.data
+            # print(temp.data)
+            # print(temp1.data)
+            temp = temp1.next
+            if temp is not None:
+                temp1 = temp.next
+
+    def remove_duplicates(self):
+        temp = self.head
+        prev = None
+        my_set = set()
+        while temp:
+            if temp.data in my_set:
+                prev.next = temp.next
+            else:
+                my_set.add(temp.data)
+                prev = temp
+            temp = temp.next
+       
+
 
 
 
 if __name__ == '__main__':
     l1 = LinkedList()
     l1.insert_beginning(1)
-    l1.push(0)
-    l1.push(0)
+    l1.push(1)
+    l1.push(1)
+    l1.push(2)
+    l1.push(3)
+    l1.push(3)
+    l1.push(4)
+    # l1.push(6)
     l1.print_linked_list()
-    print('---------------')
-    l2 = LinkedList()
-    l2.insert_beginning(5)
-    l2.push(0)
-    l2.print_linked_list()
-    l = l1.add_two_int_lists(l2)
-    print('---------------')
-    l.print_linked_list()
+    print('----------')
+    # l1.pairwise_swap_nodes()
+    # l1.print_linked_list()
+    l1.remove_duplicates()
+    l1.print_linked_list()
+    # print('---------------')
+    # l2 = LinkedList()
+    # l2.insert_beginning(5)
+    # l2.push(0)
+    # l2.print_linked_list()
+    # l = l1.add_two_int_lists(l2)
+    # print('---------------')
+    # l.print_linked_list()
     # l1.add_one_to_list()
     # l1.print_linked_list()
 
