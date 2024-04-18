@@ -196,6 +196,9 @@ class LinkedList:
         return l
     
     def pairwise_swap_nodes(self):
+        """
+            This method swaps pairwise data.
+        """
         temp = self.head
         temp1 = self.head.next
         if temp is None:
@@ -209,6 +212,9 @@ class LinkedList:
                 temp1 = temp.next
 
     def remove_duplicates(self):
+        """
+            This method removes duplicates from linkedlist.
+        """
         temp = self.head
         prev = None
         my_set = set()
@@ -219,9 +225,16 @@ class LinkedList:
                 my_set.add(temp.data)
                 prev = temp
             temp = temp.next
+
+    def detect_loop(self):
+        """
+            This method detects if there is any loop in linked list.
+        """
+        temp = self.head
+        if temp or temp.next:
+            return False
+        
        
-
-
 
 
 if __name__ == '__main__':
