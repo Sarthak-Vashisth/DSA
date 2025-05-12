@@ -316,7 +316,6 @@ class LinkedList(Generic[T]):
         while current.next:
             len+=1
             current = current.next
-        print("len", len)
         if pos == 0:
             self.head = self.head.next
         elif len == pos:
@@ -329,13 +328,50 @@ class LinkedList(Generic[T]):
             count = 0
             current = self.head
             while count <= pos:
-                print("count", count)
-                print("pos", pos)
                 prev = current
                 current = current.next
                 count+=1
             prev.next = current.next
-                
+
+    def push(self, pos: int, data: T):
+        """
+            Insert at position
+        """
+        len = 0
+        new_node = Node(data)
+        current = self.head
+
+        while current.next:
+            len+=1
+            current = current.next
+        if pos == 0:
+            new_node.next = self.head
+            self.head = new_node
+        elif len == pos:
+            while current.next:
+                current = current.next
+            current.next = new_node
+            new_node = None
+        else:
+            count = 0
+            current = self.head
+            prev = None
+            while count<pos:
+                prev = current
+                current = current.next
+                count+=1
+            new_node.next = current
+            prev.next = new_node
+
+    def is_present(self, data: T) -> bool:
+        present = False
+        current = self.head
+        while current.next:
+            if current.data == data:
+                present = True
+                break
+            current = current.next
+        return present
 
     def print(self):
         current=self.head
@@ -357,6 +393,9 @@ if __name__ == "__main__":
    l2.insert("Sarthak")
    l2.insert("Babu")
    l2.print()
-   l2.del_at_pos(1)
+#    l2.del_at_pos(1)
+#    l2.print()
+   print(l2.is_present("Sarthak"))
+   l2.push(1, "Wow")
    l2.print()
 
